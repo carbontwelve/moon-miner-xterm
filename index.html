@@ -1,0 +1,191 @@
+<!doctype html>
+<html>
+<head>
+    <link rel="stylesheet" href="node_modules/xterm/lib/xterm.css"/>
+    <link href="https://fonts.googleapis.com/css?family=VT323&display=swap&subset=latin-ext" rel="stylesheet">
+    <style>
+        body {
+            background: #333;
+        }
+
+        .logo {
+            width: 135px;
+            padding: 4px;
+            border: 1px solid rgb(157, 157, 157);
+            text-align: center;
+            font-size: 24px;
+            border-radius: 2px;
+        }
+
+        .vertical-strip {
+            display: block;
+            background: rgb(157, 157, 157);
+            width: 2px;
+            height: 100px;
+            position: absolute;
+        }
+
+        .vertical-strip:nth-of-type(1) {
+            top: -20px;
+            left: 300px;
+        }
+
+        #power-btn {
+            border-left: 2px solid rgb(157, 157, 157);
+            border-right: 2px solid rgb(157, 157, 157);
+            width: 60px;
+            height: 79px;
+            position: absolute;
+            top: -20px;
+            right: 90px;
+            padding-top: 21px;
+        }
+
+        #power-btn span{
+            font-size: 20px;
+            width: 100%;
+            text-align: center;
+            display: inline-block;
+            margin-top: 20px;
+        }
+
+        #power-btn span:before{
+            content: '';
+            display: block;
+            background: rgb(249,54,59);
+            width: 19px;
+            height: 10px;
+            border: 3px solid rgb(188,22,29);
+            margin-left: 50%;
+            transform: translateX(-50%);
+        }
+
+        main {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        #monitor-case {
+            background: rgb(204, 204, 204);
+            padding: 40px 25px 100px 25px;
+            position: relative;
+        }
+
+        #monitor-outer-border {
+            background: rgb(119, 119, 119);
+            padding: 18px;
+            border-radius: 8px 8px 0 0;
+            border: 4px solid rgb(75, 75, 75);
+            border-bottom: 8px solid rgb(119, 119, 119);
+        }
+
+        #monitor-inner-border {
+            background: rgb(153, 153, 153);
+            padding: 40px;
+            border-bottom: 4px solid rgb(75, 75, 75);
+            border-radius: 0 0 3px 3px;
+        }
+
+        #monitor-bottom {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 80px;
+            border-top: 20px solid rgb(255, 255, 255);
+            border-radius: 3px 3px 0 0;
+            background: rgb(204, 204, 204);
+            padding: 0 25px;
+
+            font-family: VT323, monospace;
+            color: rgb(157, 157, 157);
+        }
+
+        #terminal {
+            width: 620px;
+            height: 390px;
+            border: 14px solid #111309;
+            border-radius: 3px;
+            background: #111309;
+            border-top-width: 7px;
+            border-bottom-width: 7px;
+        }
+
+        #terminal-border {
+            background: rgb(119, 119, 119);
+            padding: 7px 12px;
+            border-radius: 3px;
+            position: relative;
+        }
+
+        #scanlines{
+            background: -webkit-gradient(linear,left top,left bottom,from(rgba(255,255,255,0)),color-stop(50%,rgba(255,255,255,0)),color-stop(70%,rgba(0,0,0,.2)),color-stop(70%,rgba(0,0,0,.6)));
+            background: -webkit-linear-gradient(top,rgba(255,255,255,0),rgba(255,255,255,0) 50%,rgba(0,0,0,.2) 70%,rgba(0,0,0,.6));
+            background: linear-gradient(to bottom,rgba(255,255,255,0),rgba(255,255,255,0) 50%,rgba(0,0,0,.2) 70%,rgba(0,0,0,.6));
+            background-size: 100% .3rem;
+
+            width: 648px;
+            height: 404px;
+            position: absolute;
+            z-index: 10;
+            pointer-events: none;
+        }
+    </style>
+</head>
+<body>
+
+<main>
+
+    <div id="monitor-case">
+        <div id="monitor-outer-border">
+            <div id="monitor-inner-border">
+                <div id="terminal-border">
+                    <div id="scanlines"></div>
+                    <div id="terminal"></div>
+                </div>
+            </div>
+        </div>
+        <div id="monitor-bottom">
+            <p class="logo">// Moon Miner</p>
+            <span class="vertical-strip">&nbsp;</span>
+            <div id="power-btn">
+                <span>POWER</span>
+            </div>
+        </div>
+    </div>
+
+</main>
+
+<script src="node_modules/xterm/dist/xterm.js"></script>
+<script src="node_modules/xterm/dist/addons/fit/fit.js"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    Terminal.applyAddon(fit);
+    const term = new Terminal({
+      cols: 80,
+      rows: 24,
+      fontSize: 18,
+      lineHeight: 1.25,
+      theme: {
+        background: '#111309',
+        foreground: '#fdc300',
+        white: '#fdc300',
+        black: '#111309',
+        cursor: '#fdc300'
+      }
+    });
+    term.open(document.getElementById('terminal'));
+    term.fit();
+    term.writeln('Ore Bios (C) 2086 Mining Corp, Ltd.');
+    term.writeln('BIOS Date 01/01/2086 16:13:29 Ver: 11.00.09');
+    term.writeln('CPU: PPC(R) CPU RedCore @ 40Mhz');
+    term.writeln('\u001b[47;1m\u001b[30mMemory Test:\u001b[0m 128K OK');
+
+    term.writeln('Booting from Hard Disk...');
+    term.writeln('Starting ColonyOS v1.03');
+  });
+</script>
+</body>
+</html>
