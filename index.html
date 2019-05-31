@@ -4,6 +4,16 @@
     <link rel="stylesheet" href="node_modules/xterm/lib/xterm.css"/>
     <link href="https://fonts.googleapis.com/css?family=VT323&display=swap&subset=latin-ext" rel="stylesheet">
     <style>
+
+        :root {
+            --accent-grey: rgb(157, 157, 157);
+            --dark-grey: rgb(75, 75, 75);
+            --grey: rgb(119, 119, 119);
+            --mid-grey: rgb(153, 153, 153);
+            --light-grey: rgb(204, 204, 204);
+        }
+
+        body,html{ padding: 0; margin: 0;}
         body {
             background: #333;
         }
@@ -11,15 +21,17 @@
         .logo {
             width: 135px;
             padding: 4px;
-            border: 1px solid rgb(157, 157, 157);
+            border: 1px solid var(--accent-grey);
             text-align: center;
             font-size: 24px;
             border-radius: 2px;
         }
 
+        .xterm-viewport { overflow: hidden !important; }
+
         .vertical-strip {
             display: block;
-            background: rgb(157, 157, 157);
+            background: var(--accent-grey);
             width: 2px;
             height: 100px;
             position: absolute;
@@ -31,8 +43,8 @@
         }
 
         #power-btn {
-            border-left: 2px solid rgb(157, 157, 157);
-            border-right: 2px solid rgb(157, 157, 157);
+            border-left: 2px solid var(--accent-grey);
+            border-right: 2px solid var(--accent-grey);
             width: 60px;
             height: 79px;
             position: absolute;
@@ -68,23 +80,23 @@
         }
 
         #monitor-case {
-            background: rgb(204, 204, 204);
+            background: var(--light-grey);
             padding: 40px 25px 100px 25px;
             position: relative;
         }
 
         #monitor-outer-border {
-            background: rgb(119, 119, 119);
+            background: var(--grey);
             padding: 18px;
             border-radius: 8px 8px 0 0;
-            border: 4px solid rgb(75, 75, 75);
-            border-bottom: 8px solid rgb(119, 119, 119);
+            border: 4px solid var(--dark-grey);
+            border-bottom: 8px solid var(--grey);
         }
 
         #monitor-inner-border {
-            background: rgb(153, 153, 153);
+            background: var(--mid-grey);
             padding: 40px;
-            border-bottom: 4px solid rgb(75, 75, 75);
+            border-bottom: 4px solid var(--dark-grey);
             border-radius: 0 0 3px 3px;
         }
 
@@ -94,13 +106,13 @@
             left: 0;
             right: 0;
             height: 80px;
-            border-top: 20px solid rgb(255, 255, 255);
+            border-top: 20px solid white;
             border-radius: 3px 3px 0 0;
-            background: rgb(204, 204, 204);
+            background: var(--light-grey);
             padding: 0 25px;
 
             font-family: VT323, monospace;
-            color: rgb(157, 157, 157);
+            color: var(--accent-grey);
         }
 
         #terminal {
@@ -114,7 +126,7 @@
         }
 
         #terminal-border {
-            background: rgb(119, 119, 119);
+            background: var(--grey);
             padding: 7px 12px;
             border-radius: 3px;
             position: relative;
@@ -167,7 +179,7 @@
       cols: 80,
       rows: 24,
       fontSize: 18,
-      lineHeight: 1.25,
+      fontFamily: 'monospace',
       theme: {
         background: '#111309',
         foreground: '#fdc300',
